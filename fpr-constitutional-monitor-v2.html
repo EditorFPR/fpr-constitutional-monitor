@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPR Constitutional Monitor — Fiji Political Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate: #2c3549;
+    --slate-light: #3d4a62;
+    --slate-dark: #1e2535;
+    --coral: #e07a5f;
+    --coral-light: #e8967f;
+    --coral-dark: #c4634a;
+    --cream: #f4f1ee;
+    --cream-dark: #e8e4df;
+    --white: #ffffff;
+    --text: #2c3549;
+    --text-muted: #6b7280;
+    --border: #d4cfc9;
+    --success: #4a7c59;
+    --warning: #b5793a;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Source Serif 4', serif;
+    --display: 'Playfair Display', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--slate);
+    color: var(--cream);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .header-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .header-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    opacity: 0.9;
+  }
+
+  .header-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-staff {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(244,241,238,0.3);
+    color: var(--cream);
+    padding: 6px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-staff:hover, .btn-staff.active {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: var(--white);
+  }
+
+  .quarter-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--coral);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--slate-dark);
+    border-bottom: 2px solid var(--coral);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .nav-tab {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244,241,238,0.55);
+    padding: 14px 20px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .nav-tab:hover { color: var(--cream); }
+
+  .nav-tab.active {
+    color: var(--coral);
+    border-bottom-color: var(--coral);
+  }
+
+  /* ── MAIN ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--slate);
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 680px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── OVERVIEW CARDS ── */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .domain-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--coral);
+    padding: 24px;
+    border-radius: 2px;
+  }
+
+  .domain-card-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .domain-card-title {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 12px;
+  }
+
+  .domain-card-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  .stat-label { color: var(--text-muted); font-weight: 300; }
+
+  .stat-value {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--slate);
+  }
+
+  .stat-value.highlight { color: var(--coral); }
+
+  .no-data-msg {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 0;
+    border: 1px dashed var(--border);
+    border-radius: 2px;
+  }
+
+  /* ── DATA TABLE ── */
+  .data-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .data-section-header {
+    background: var(--slate);
+    color: var(--cream);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .data-section-title {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .data-section-subtitle {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-top: 2px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: var(--cream);
+    padding: 10px 16px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--cream-dark);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: var(--cream); }
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 11px 16px;
+    vertical-align: top;
+  }
+
+  td:first-child {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--coral);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+  .badge-verified   { background: rgba(74,124,89,0.12);  color: #3a6647; }
+  .badge-partial    { background: rgba(181,121,58,0.12); color: #8a5a20; }
+  .badge-pending    { background: rgba(44,53,73,0.08);   color: #4a5568; }
+  .badge-current    { background: rgba(224,122,95,0.12); color: #b85c42; }
+
+  td.notes-cell {
+    font-size: 12px;
+    color: var(--text-muted);
+    max-width: 240px;
+    line-height: 1.5;
+  }
+
+  td.notes-cell .note-text {
+    font-style: italic;
+    display: block;
+    margin-top: 3px;
+    cursor: help;
+  }
+
+  .empty-table {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FORM ── */
+  .staff-panel {
+    display: none;
+    background: var(--slate-dark);
+    border-radius: 4px;
+    padding: 32px;
+    margin-bottom: 40px;
+    border-left: 4px solid var(--coral);
+  }
+
+  .staff-panel.visible { display: block; }
+
+  .staff-panel-title {
+    font-family: var(--display);
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .staff-panel-subtitle {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 24px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group.half { grid-column: span 2; }
+
+  label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244,241,238,0.6);
+  }
+
+  .staff-panel input[type="text"],
+  .staff-panel input[type="number"],
+  .staff-panel select,
+  .staff-panel textarea {
+    background: rgba(244,241,238,0.08);
+    border: 1px solid rgba(244,241,238,0.2);
+    color: var(--cream);
+    padding: 9px 12px;
+    border-radius: 2px;
+    font-family: var(--serif);
+    font-size: 14px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .staff-panel input:focus,
+  .staff-panel select:focus,
+  .staff-panel textarea:focus {
+    outline: none;
+    border-color: var(--coral);
+    background: rgba(244,241,238,0.12);
+  }
+
+  .staff-panel textarea { min-height: 80px; resize: vertical; }
+  .staff-panel select option { background: var(--slate); }
+
+  /* Light-background selects (view quarter selectors, quarter badge selects) */
+  .quarter-selector select,
+  .form-group > select:not(.staff-panel select) {
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    font-family: var(--serif);
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .quarter-selector select:focus {
+    outline: none;
+    border-color: var(--coral);
+  }
+
+  .form-divider {
+    border: none;
+    border-top: 1px solid rgba(244,241,238,0.1);
+    margin: 20px 0;
+  }
+
+  .form-section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 16px;
+  }
+
+  .btn-submit {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--coral);
+    color: var(--white);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+
+  .btn-submit:hover { background: var(--coral-dark); }
+
+  .btn-delete {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: rgba(244,241,238,0.4);
+    border: 1px solid rgba(244,241,238,0.2);
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    float: right;
+  }
+
+  .btn-delete:hover { background: rgba(224,122,95,0.2); color: var(--coral); border-color: var(--coral); }
+
+  .success-msg {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #7ec8a0;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* ── INDICATORS ── */
+  .indicator-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .pill-high { background: rgba(74,124,89,0.15); color: #4a7c59; }
+  .pill-medium { background: rgba(181,121,58,0.15); color: #b5793a; }
+  .pill-low { background: rgba(224,122,95,0.15); color: var(--coral-dark); }
+
+  /* ── METHODOLOGY ── */
+  .methodology-body {
+    max-width: 760px;
+  }
+
+  .method-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+
+  .method-block h3 {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .method-block h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin: 20px 0 8px;
+  }
+
+  .method-block p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  .method-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+  }
+
+  .method-block ul li {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.65;
+    padding: 5px 0 5px 18px;
+    position: relative;
+    font-weight: 300;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .method-block ul li:last-child { border-bottom: none; }
+
+  .method-block ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--coral);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .limitations-box {
+    background: rgba(44,53,73,0.05);
+    border-left: 3px solid var(--slate-light);
+    padding: 16px 20px;
+    border-radius: 0 2px 2px 0;
+    margin-top: 12px;
+  }
+
+  .limitations-box p {
+    font-size: 13px;
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  /* ── PRINT ── */
+  .btn-print {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-print:hover { border-color: var(--coral); color: var(--coral); }
+
+  /* ── QUARTER SELECTOR ── */
+  .quarter-selector {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .quarter-selector label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .quarter-selector select {
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+    max-width: 180px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    background: rgba(224,122,95,0.1);
+    border: 1px solid rgba(224,122,95,0.3);
+    border-left: 3px solid var(--coral);
+    padding: 14px 18px;
+    border-radius: 0 2px 2px 0;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  .alert .alert-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--slate-dark);
+    color: rgba(244,241,238,0.4);
+    padding: 24px 32px;
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    line-height: 1.8;
+  }
+
+  footer a {
+    color: var(--coral);
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .domain-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.half { grid-column: span 1; }
+    .container { padding: 24px 16px; }
+    .header-inner { padding: 14px 16px; }
+    .nav-inner { padding: 0 16px; }
+    .nav-tab { padding: 12px 14px; font-size: 10px; }
+    .section-title { font-size: 24px; }
+  }
+
+  @media print {
+    header, nav, .staff-panel, .btn-print, .btn-staff, .nav-tab { display: none !important; }
+    .tab-panel { display: block !important; }
+    body { background: white; }
+    .data-section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-brand">
+      <span class="header-eyebrow">Fiji Political Review</span>
+      <span class="header-title">Constitutional Monitor</span>
+    </div>
+    <div class="header-actions">
+      <span class="quarter-badge" id="currentQuarterBadge">Loading...</span>
+      <button class="btn-staff" id="staffToggle" onclick="toggleStaff()">Staff Mode</button>
+      <button class="btn-print" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="switchTab('overview')">Overview</button>
+    <button class="nav-tab" onclick="switchTab('parliamentary')">Parliamentary</button>
+    <button class="nav-tab" onclick="switchTab('judicial')">Judicial</button>
+    <button class="nav-tab" onclick="switchTab('electoral')">Electoral Administration</button>
+    <button class="nav-tab" onclick="switchTab('methodology')">Methodology</button>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- OVERVIEW TAB                               -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="section-header">
+        <div class="section-label">FPR Constitutional Monitor</div>
+        <h1 class="section-title">Behavioural Constitutionalism in Fiji</h1>
+        <p class="section-desc">Tracking how the 2013 Constitution actually functions across executive, legislative, and judicial practice—not what its text permits. Updated quarterly.</p>
+      </div>
+
+      <div class="alert" id="sampleDataBanner" style="display:none; background:rgba(74,124,89,0.08); border-color:rgba(74,124,89,0.4); border-left-color:#4a7c59;">
+        <strong class="alert-title" style="color:#4a7c59;">✓ Parliamentary Data: Verified — Judicial & Electoral: Pending</strong>
+        Parliamentary indicators for 2023 Q1 – 2024 Q3 are populated from the official <strong>Parliament Sitting Statistics</strong> (parliament.gov.fj, September 2024 edition), a verified public document. Judicial and electoral domain fields are marked PENDING and require sourcing from PacLII and the Fijian Elections Office respectively. Opposition speaking ratios require Hansard review. <button onclick="clearSampleData()" style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:1px solid #4a7c59;color:#4a7c59;padding:3px 10px;border-radius:2px;cursor:pointer;margin-left:8px;">Clear All Data</button>
+      </div>
+
+      <div class="alert">
+        <strong class="alert-title">About this monitor</strong>
+        The FPR Constitutional Monitor was established to fill an evidentiary gap in Pacific democracy studies: no longitudinal operational record of Fiji's constitutional practice has existed. This tracker builds that record, quarter by quarter, across three domains: parliamentary practice, judicial practice, and electoral administration.
+      </div>
+
+      <div class="alert" style="background:rgba(44,53,73,0.06); border-color:rgba(44,53,73,0.25); border-left-color:var(--slate);">
+        <strong class="alert-title" style="color:var(--slate);">⚑ Active Transparency Flag — Electoral Legislation Review</strong>
+        A review of Fiji's electoral legislation was completed in <strong>July 2025</strong>, but remains unreleased and untabled in Parliament. When a Commissioner leaked details of a proposed new voting system to local media in <strong>November 2025</strong>, the Acting Attorney-General issued a reprimand — confirming the review's existence while withholding its content. As of <strong>May 2026</strong>, with a general election due August 2026–February 2027, the Fijian public has not been formally informed of proposed changes to the system that will govern that election. FPR records this as an active accountability gap and will update this flag when the review is publicly tabled.
+      </div>
+
+      <div class="domain-grid" id="overviewGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="data-section">
+        <div class="data-section-header">
+          <div>
+            <div class="data-section-title">All Quarters — Summary Record</div>
+            <div class="data-section-subtitle">Longitudinal constitutional practice data</div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Quarter</th>
+              <th>Bills Passed</th>
+              <th>Unamended %</th>
+              <th>Urgency Motions</th>
+              <th>Constitutional Cases</th>
+              <th>State Win Rate</th>
+              <th>Electoral Rulings</th>
+              <th>Refusals</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTableBody">
+            <tr><td colspan="8" class="empty-table">No data recorded yet. Use Staff Mode to enter the first quarter.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- PARLIAMENTARY TAB                          -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-parliamentary">
+      <div class="section-header">
+        <div class="section-label">Domain I</div>
+        <h2 class="section-title">Parliamentary Practice</h2>
+        <p class="section-desc">Tracks legislative behaviour across each parliamentary session: bill passage rates, committee function, urgency use, and opposition participation. These indicators reveal whether parliamentary process is substantive or procedural.</p>
+      </div>
+
+      <div class="staff-panel" id="staff-parliamentary">
+        <div class="staff-panel-title">Record Parliamentary Data</div>
+        <div class="staff-panel-subtitle">Staff Entry — Parliamentary Domain</div>
+
+        <div class="form-group" style="margin-bottom:20px; max-width:200px;">
+          <label>Quarter</label>
+          <select id="parl-quarter"></select>
+        </div>
+
+        <div class="form-section-label">Legislative Indicators</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Bills Introduced</label>
+            <input type="number" id="p-billsIntroduced" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Bills Passed</label>
+            <input type="number" id="p-billsPassed" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Passed Without Amendment</label>
+            <input type="number" id="p-billsUnamended" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Urgency Motions Used</label>
+            <input type="number" id="p-urgencyMotions" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Select Committee Referrals</label>
+            <input type="number" id="p-committeeReferrals" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Avg. Days: Introduction → Passage</label>
+            <input type="number" id="p-avgDays" min="0" placeholder="0">
+          </div>
+        </div>
+
+        <hr class="form-divider">
+        <div class="form-section-label">Qualitative Indicators</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Opposition Speaking Ratio</label>
+            <select id="p-oppositionRatio">
+              <option value="">— Select —</option>
+              <option value="high">High (proportional or above)</option>
+              <option value="medium">Medium (reduced but present)</option>
+              <option value="low">Low (substantially curtailed)</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label>Notable Urgency Motions (subjects)</label>
+            <input type="text" id="p-urgencySubjects" placeholder="e.g. Budget Amendment Bill, Electoral Decree...">
+          </div>
+          <div class="form-group full">
+            <label>Analyst Notes</label>
+            <textarea id="p-notes" placeholder="Contextual observations about parliamentary behaviour this quarter..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="saveParliamentary()">Save Parliamentary Data</button>
+        <div class="success-msg" id="parl-success">✓ Data saved successfully.</div>
+      </div>
+
+      <div class="quarter-selector">
+        <label>View Quarter:</label>
+        <select id="parl-view-quarter" onchange="renderParliamentaryTable()">
+          <option value="all">All Quarters</option>
+        </select>
+      </div>
+
+      <div class="data-section">
+        <div class="data-section-header">
+          <div>
+            <div class="data-section-title">Parliamentary Indicators</div>
+            <div class="data-section-subtitle">Legislative practice record</div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Quarter</th>
+              <th>Bills In</th>
+              <th>Bills Passed</th>
+              <th>Unamended %</th>
+              <th>Urgency</th>
+              <th>Cmte Referrals</th>
+              <th>Avg Days</th>
+              <th>Opposition Ratio</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="parlTableBody">
+            <tr><td colspan="9" class="empty-table">No data recorded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- JUDICIAL TAB                               -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-judicial">
+      <div class="section-header">
+        <div class="section-label">Domain II</div>
+        <h2 class="section-title">Judicial Practice</h2>
+        <p class="section-desc">Tracks constitutional case activity: filings, outcomes, state win rates, time to judgment, and provisions litigated. Patterns across quarters reveal whether judicial independence is operational or nominal.</p>
+      </div>
+
+      <div class="staff-panel" id="staff-judicial">
+        <div class="staff-panel-title">Record Judicial Data</div>
+        <div class="staff-panel-subtitle">Staff Entry — Judicial Domain</div>
+
+        <div class="form-group" style="margin-bottom:20px; max-width:200px;">
+          <label>Quarter</label>
+          <select id="jud-quarter"></select>
+        </div>
+
+        <div class="form-section-label">Case Volume</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Constitutional Cases Filed</label>
+            <input type="number" id="j-casesFiled" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Cases Decided</label>
+            <input type="number" id="j-casesDecided" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Cases Pending (cumulative)</label>
+            <input type="number" id="j-casesPending" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>State Wins</label>
+            <input type="number" id="j-stateWins" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>State Losses</label>
+            <input type="number" id="j-stateLosses" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Avg. Days: Filing → Judgment</label>
+            <input type="number" id="j-avgDays" min="0" placeholder="0">
+          </div>
+        </div>
+
+        <hr class="form-divider">
+        <div class="form-section-label">Qualitative Indicators</div>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Constitutional Provisions Litigated This Quarter</label>
+            <input type="text" id="j-provisions" placeholder="e.g. Section 131 (emergency powers), Section 105 (Supervisor appointment)...">
+          </div>
+          <div class="form-group full">
+            <label>Notable Cases (brief description)</label>
+            <textarea id="j-notableCases" placeholder="Case names, parties, brief description of constitutional question raised..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Analyst Notes</label>
+            <textarea id="j-notes" placeholder="Patterns, anomalies, or contextual observations about judicial behaviour this quarter..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="saveJudicial()">Save Judicial Data</button>
+        <div class="success-msg" id="jud-success">✓ Data saved successfully.</div>
+      </div>
+
+      <div class="quarter-selector">
+        <label>View Quarter:</label>
+        <select id="jud-view-quarter" onchange="renderJudicialTable()">
+          <option value="all">All Quarters</option>
+        </select>
+      </div>
+
+      <div class="data-section">
+        <div class="data-section-header">
+          <div>
+            <div class="data-section-title">Judicial Indicators</div>
+            <div class="data-section-subtitle">Constitutional case practice record</div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Quarter</th>
+              <th>Filed</th>
+              <th>Decided</th>
+              <th>Pending</th>
+              <th>State Wins</th>
+              <th>State Losses</th>
+              <th>Win Rate</th>
+              <th>Avg Days</th>
+              <th>Provisions</th>
+            </tr>
+          </thead>
+          <tbody id="judTableBody">
+            <tr><td colspan="9" class="empty-table">No data recorded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- ELECTORAL ADMINISTRATION TAB               -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-electoral">
+      <div class="section-header">
+        <div class="section-label">Domain III</div>
+        <h2 class="section-title">Electoral Administration</h2>
+        <p class="section-desc">Tracks all decisions made by the Supervisor of Elections and the Electoral Commission: party registrations, refusals, boundary determinations, and eligibility rulings. Under the 2013 Constitution, electoral administration is structurally dependent on executive appointment—this domain tracks whether that dependence manifests in operational decisions.</p>
+      </div>
+
+      <div class="alert" style="background:rgba(44,53,73,0.06); border-color:rgba(44,53,73,0.3); border-left-color:var(--slate);">
+        <strong class="alert-title" style="color:var(--slate);">⚑ Active Transparency Flag — Undisclosed Electoral Legislation Review</strong>
+        A government-commissioned review of Fiji's electoral legislation was completed in <strong>July 2025</strong> and has not been publicly released, tabled in Parliament, or had its terms of reference disclosed. When details of a proposed new voting system were leaked to local media by a review commissioner in November 2025, the Acting Attorney-General issued a formal reprimand — confirming the review exists while refusing to release it. As of <strong>May 2026</strong>, with a general election constitutionally required between August 2026 and February 2027, Fijians remain formally uninformed about proposed changes to the system that will govern that election. Electoral reform proceeding on the basis of an undisclosed review would be a material breach of the transparency standards this domain exists to track. <strong>FPR will update this flag when the review is tabled in Parliament.</strong>
+      </div>
+
+      <div class="staff-panel" id="staff-electoral">
+        <div class="staff-panel-title">Record Electoral Administration Data</div>
+        <div class="staff-panel-subtitle">Staff Entry — Electoral Administration Domain</div>
+
+        <div class="form-group" style="margin-bottom:20px; max-width:200px;">
+          <label>Quarter</label>
+          <select id="elec-quarter"></select>
+        </div>
+
+        <div class="form-section-label">Decision Volume</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Party Registration Decisions</label>
+            <input type="number" id="e-registrationDecisions" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Registration Refusals</label>
+            <input type="number" id="e-registrationRefusals" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Boundary Determinations</label>
+            <input type="number" id="e-boundaryDeterminations" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Party Eligibility Rulings</label>
+            <input type="number" id="e-eligibilityRulings" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Candidate Eligibility Rulings</label>
+            <input type="number" id="e-candidateRulings" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Rulings Appealed</label>
+            <input type="number" id="e-rulingAppeals" min="0" placeholder="0">
+          </div>
+        </div>
+
+        <hr class="form-divider">
+        <div class="form-section-label">Qualitative Indicators</div>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Refusal Details (if any)</label>
+            <textarea id="e-refusalDetails" placeholder="Which parties or candidates? Grounds stated? Consistency with prior decisions?"></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Notable Decisions</label>
+            <textarea id="e-notableDecisions" placeholder="Any significant rulings, appeals outcomes, or procedural anomalies..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Analyst Notes</label>
+            <textarea id="e-notes" placeholder="Patterns, inconsistencies, or contextual observations about electoral administration this quarter..."></textarea>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="saveElectoral()">Save Electoral Administration Data</button>
+        <div class="success-msg" id="elec-success">✓ Data saved successfully.</div>
+      </div>
+
+      <div class="quarter-selector">
+        <label>View Quarter:</label>
+        <select id="elec-view-quarter" onchange="renderElectoralTable()">
+          <option value="all">All Quarters</option>
+        </select>
+      </div>
+
+      <div class="data-section">
+        <div class="data-section-header">
+          <div>
+            <div class="data-section-title">Electoral Administration Indicators</div>
+            <div class="data-section-subtitle">Supervisor of Elections practice record</div>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Quarter</th>
+              <th>Reg. Decisions</th>
+              <th>Refusals</th>
+              <th>Boundary Det.</th>
+              <th>Party Rulings</th>
+              <th>Candidate Rulings</th>
+              <th>Appeals</th>
+              <th>Notable Decisions</th>
+            </tr>
+          </thead>
+          <tbody id="elecTableBody">
+            <tr><td colspan="8" class="empty-table">No data recorded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- METHODOLOGY TAB                            -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-methodology">
+      <div class="section-header">
+        <div class="section-label">Documentation</div>
+        <h2 class="section-title">Methodology & Framework</h2>
+        <p class="section-desc">The FPR Constitutional Monitor's design rationale, indicator definitions, data sources, and interpretive limitations.</p>
+      </div>
+
+      <div class="methodology-body">
+
+        <div class="method-block">
+          <h3>What This Monitor Is</h3>
+          <p>The FPR Constitutional Monitor tracks how Fiji's 2013 Constitution operates in practice across three domains: parliamentary process, judicial practice, and electoral administration. It does not assess what the Constitution's text permits. It assesses what constitutional actors—the Parliament, the courts, and the Supervisor of Elections—actually do.</p>
+          <p>This distinction matters. The 2013 Constitution concentrates significant power in the executive, with the Supervisor of Elections appointed by presidential advice, emergency powers exercisable on Prime Ministerial advice alone, and no upper house or provincial representation mechanism. Whether these provisions function as designed—or are used in ways their text does not require—is an empirical question that requires operational observation over time.</p>
+          <p>The Monitor provides that observation. It is updated quarterly and produces a cumulative longitudinal record that did not previously exist in Fiji's democratic literature.</p>
+        </div>
+
+        <div class="method-block">
+          <h3>Why This Exists</h3>
+          <p>Pacific democracy scholarship has operated for three decades almost exclusively through single-country case studies drawing on constitutional text, aggregate electoral data, and historical-institutional narrative. No study has systematically tracked constitutional practice across executive, legislative, and judicial domains over time. The field's most important question—whether Fiji's 2022 election represented a democratic transition or an authoritarian pause—cannot be answered with the methods currently available.</p>
+          <p>The FPR Constitutional Monitor does not resolve this question. It builds the evidentiary foundation on which that question can eventually be tested by scholars and civil society organisations with access to the full suite of behavioral and institutional research methods.</p>
+          <p>The Monitor operates in the tradition of behavioral constitutionalism: the study of how constitutional provisions function in practice rather than how they read on paper. This approach is standard in comparative constitutional studies in other regions and largely absent from Pacific political science.</p>
+        </div>
+
+        <div class="method-block">
+          <h3>Domain I — Parliamentary Practice</h3>
+          <h4>What is tracked</h4>
+          <ul>
+            <li><strong>Bills introduced vs. bills passed:</strong> Passage rate as a baseline indicator of legislative productivity and executive control of the agenda.</li>
+            <li><strong>Bills passed without committee amendment:</strong> The proportion of bills passing unamended indicates whether parliamentary committees function as substantive scrutiny bodies or procedural formalities. High rates of unamended passage suggest rubber-stamp dynamics.</li>
+            <li><strong>Urgency motions:</strong> Urgency procedures allow the government to bypass ordinary notice and committee requirements. Frequent use, particularly on contested legislation, indicates executive dominance over parliamentary process.</li>
+            <li><strong>Select committee referrals:</strong> Referral to select committees signals that Parliament is exercising deliberative rather than merely ratificatory functions.</li>
+            <li><strong>Average days from introduction to passage:</strong> Very short timelines may indicate urgency use or executive pressure; longer timelines may indicate genuine deliberation or opposition effectiveness.</li>
+            <li><strong>Opposition speaking ratio:</strong> Qualitative assessment of whether opposition members receive proportional speaking time in debate.</li>
+          </ul>
+          <h4>Data sources</h4>
+          <ul>
+            <li>Fiji Parliament Hansard (published at parliament.gov.fj)</li>
+            <li>Parliamentary committee reports and minutes</li>
+            <li>FPR parliamentary monitoring (live session tracking)</li>
+          </ul>
+          <div class="limitations-box">
+            <p><strong>Limitation:</strong> Hansard records what is said, not what is intended. Committee minutes may not capture informal executive pressure. Opposition speaking ratio is a qualitative judgement call that different observers may assess differently. These indicators identify patterns; they do not establish causation.</p>
+          </div>
+        </div>
+
+        <div class="method-block">
+          <h3>Domain II — Judicial Practice</h3>
+          <h4>What is tracked</h4>
+          <ul>
+            <li><strong>Constitutional cases filed:</strong> Volume of constitutional litigation as an indicator of civic willingness to use judicial review and accessibility of court processes.</li>
+            <li><strong>Cases decided vs. pending:</strong> A large backlog of undecided constitutional cases may indicate capacity constraints or deliberate delay.</li>
+            <li><strong>State win rate:</strong> The proportion of cases the state wins does not by itself indicate bias—the state may be correct on the law. However, a consistently high state win rate across a range of constitutional provisions and different judges warrants further investigation.</li>
+            <li><strong>Average days from filing to judgment:</strong> Extended timelines in constitutional cases may deprive litigants of timely relief and effectively insulate executive action from judicial review.</li>
+            <li><strong>Provisions litigated:</strong> Which sections of the 2013 Constitution are actually contested in court reveals which parts of the constitutional architecture face operational challenge and which do not.</li>
+          </ul>
+          <h4>Data sources</h4>
+          <ul>
+            <li>Fiji Judiciary published judgments (judiciary.gov.fj)</li>
+            <li>Citizens' Constitutional Forum litigation tracking</li>
+            <li>Pacific Legal Information Institute (PacLII)</li>
+            <li>Legal practitioners appearing in constitutional matters (background sourcing)</li>
+          </ul>
+          <div class="limitations-box">
+            <p><strong>Limitation:</strong> Published judgments do not capture unreported decisions, withdrawn cases, or cases settled before judgment. Sitting judges cannot ethically be interviewed about executive pressure. This domain tracks documentary evidence of outcomes; it cannot directly establish the reasons behind those outcomes.</p>
+          </div>
+        </div>
+
+        <div class="method-block">
+          <h3>Domain III — Electoral Administration</h3>
+          <h4>What is tracked</h4>
+          <ul>
+            <li><strong>Party registration decisions:</strong> All registration acceptances and refusals, with grounds stated.</li>
+            <li><strong>Registration refusals:</strong> Refusals are tracked separately because they are the primary mechanism by which electoral administration can advantage or disadvantage political competitors. Grounds for refusal are recorded and compared across parties for consistency.</li>
+            <li><strong>Boundary determinations:</strong> Electoral boundary changes have historically been used to dilute opposition representation. This indicator tracks how frequently and on what basis boundaries are adjusted.</li>
+            <li><strong>Party and candidate eligibility rulings:</strong> The Supervisor's eligibility determinations under the Political Parties Decree 2013 and the Electoral Act are tracked for volume, grounds, and consistency.</li>
+            <li><strong>Appeals:</strong> Rulings appealed and outcomes of those appeals as an indicator of whether electoral administration decisions withstand legal scrutiny.</li>
+          </ul>
+          <h4>Data sources</h4>
+          <ul>
+            <li>Fijian Elections Office official announcements and gazette notices</li>
+            <li>Electoral Commission determinations</li>
+            <li>Pacific Islands Forum and Carter Center observer reports</li>
+            <li>Citizens' Constitutional Forum electoral monitoring</li>
+          </ul>
+          <div class="limitations-box">
+            <p><strong>Limitation:</strong> Not all Supervisor of Elections decisions are publicly gazetted. Some administrative decisions are communicated directly to parties without public record. This domain tracks what is publicly documented; the full decision record may be more extensive than what the Monitor can capture.</p>
+          </div>
+        </div>
+
+        <div class="method-block">
+          <h3>Interpretive Principles</h3>
+          <p>The Monitor applies four interpretive principles in producing its quarterly reports:</p>
+          <ul>
+            <li><strong>Pattern over incident:</strong> A single urgency motion, a single case lost by the state, or a single registration refusal is not evidence of constitutional malfunction. Patterns across multiple quarters are the relevant unit of analysis.</li>
+            <li><strong>Comparison over judgement:</strong> Where possible, indicators are compared to prior quarters and to comparable indicators in other Pacific jurisdictions rather than assessed against an abstract ideal of constitutional democracy.</li>
+            <li><strong>Transparency about absence:</strong> Where data cannot be obtained, this is recorded explicitly. Absence of data is itself a finding—it may indicate opacity in institutional processes.</li>
+            <li><strong>Separation of observation and interpretation:</strong> Quantitative indicators are recorded separately from analyst notes. The Monitor distinguishes between what was observed and what it might mean.</li>
+          </ul>
+          <div class="limitations-box">
+            <p><strong>Overall limitation:</strong> This Monitor tracks constitutional practice as documented in public records and through source relationships. It cannot access classified deliberations, private communications between constitutional actors, or informal executive influence that leaves no public record. It maps the observable surface of constitutional behaviour. Deeper structural questions require the behavioral, subnational, and experimental research methods that Pacific democracy studies has yet to build.</p>
+          </div>
+        </div>
+
+        <div class="method-block">
+          <h3>Institutional Partners</h3>
+          <p>The FPR Constitutional Monitor draws on partnerships with the following organisations, which provide field intelligence, legal analysis, and source relationships that FPR cannot replicate independently:</p>
+          <ul>
+            <li><strong>Citizens' Constitutional Forum (CCF):</strong> Constitutional compliance monitoring and public interest litigation tracking.</li>
+            <li><strong>University of the South Pacific — Law Faculty:</strong> Legal analysis of constitutional cases and provisions. FPR commissions short expert commentaries from USP-based researchers on significant constitutional developments.</li>
+            <li><strong>Dialogue Fiji:</strong> Civil society access and community trust networks, particularly for provincial and subnational observations.</li>
+            <li><strong>Fiji Women's Crisis Network (FWCN):</strong> Gender dimensions of electoral participation and accountability, including women's candidacy eligibility determinations and gendered impacts of electoral administration decisions.</li>
+            <li><strong>Constitutional practitioners (background):</strong> Lawyers appearing regularly in constitutional matters provide off-record context on judicial functioning that public records alone cannot supply.</li>
+          </ul>
+        </div>
+
+        <div class="method-block">
+          <h3>Update Schedule and Archive</h3>
+          <ul>
+            <li><strong>Q1:</strong> January – March (published April)</li>
+            <li><strong>Q2:</strong> April – June (published July)</li>
+            <li><strong>Q3:</strong> July – September (published October)</li>
+            <li><strong>Q4:</strong> October – December (published January)</li>
+          </ul>
+          <p style="margin-top:14px;">All quarterly data is retained in this tracker. The cumulative record is the Monitor's primary contribution. Individual quarterly reports may be published on fijipoliticalreview.com.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</main>
+
+<footer>
+  <p>
+    FPR Constitutional Monitor — <a href="https://fijipoliticalreview.com">Fiji Political Review</a><br>
+    Tracking behavioural constitutionalism in Fiji since 2024<br>
+    Data stored locally in this browser. Export via Print / PDF for archival records.
+  </p>
+</footer>
+
+<script>
+  // ─────────────────────────────────────────────
+  // QUARTER UTILITIES
+  // ─────────────────────────────────────────────
+  function getCurrentQuarter() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const q = Math.ceil((now.getMonth() + 1) / 3);
+    return `${y}-Q${q}`;
+  }
+
+  function generateQuarters(startYear = 2023, count = 24) {
+    const quarters = [];
+    for (let i = 0; i < count; i++) {
+      const y = startYear + Math.floor(i / 4);
+      const q = (i % 4) + 1;
+      quarters.push(`${y}-Q${q}`);
+    }
+    return quarters;
+  }
+
+  function formatQuarterLabel(qKey) {
+    const [year, qNum] = qKey.split('-');
+    const qn = qNum.replace('Q', '');
+    const months = ['Jan–Mar', 'Apr–Jun', 'Jul–Sep', 'Oct–Dec'];
+    return `${months[parseInt(qn) - 1]} ${year}`;
+  }
+
+  // ─────────────────────────────────────────────
+  // STORAGE
+  // ─────────────────────────────────────────────
+  function loadData() {
+    try {
+      return JSON.parse(localStorage.getItem('fpr_monitor') || '{}');
+    } catch { return {}; }
+  }
+
+  function saveData(data) {
+    localStorage.setItem('fpr_monitor', JSON.stringify(data));
+  }
+
+  // ─────────────────────────────────────────────
+  // INIT QUARTER DROPDOWNS
+  // ─────────────────────────────────────────────
+  function populateQuarterSelects() {
+    const quarters = generateQuarters();
+    const current = getCurrentQuarter();
+    const selects = ['parl-quarter', 'jud-quarter', 'elec-quarter'];
+
+    selects.forEach(id => {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      sel.innerHTML = '';
+      quarters.forEach(q => {
+        const opt = document.createElement('option');
+        opt.value = q;
+        opt.textContent = formatQuarterLabel(q);
+        if (q === current) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    });
+
+    const data = loadData();
+    const recordedQuarters = Object.keys(data).sort();
+
+    const viewSelects = ['parl-view-quarter', 'jud-view-quarter', 'elec-view-quarter'];
+    viewSelects.forEach(id => {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      sel.innerHTML = '<option value="all">All Quarters</option>';
+      recordedQuarters.forEach(q => {
+        if (data[q]) {
+          const opt = document.createElement('option');
+          opt.value = q;
+          opt.textContent = formatQuarterLabel(q);
+          sel.appendChild(opt);
+        }
+      });
+    });
+
+    document.getElementById('currentQuarterBadge').textContent = formatQuarterLabel(current);
+  }
+
+  // ─────────────────────────────────────────────
+  // SAVE FUNCTIONS
+  // ─────────────────────────────────────────────
+  function saveParliamentary() {
+    const q = document.getElementById('parl-quarter').value;
+    const data = loadData();
+    if (!data[q]) data[q] = {};
+    data[q].parliamentary = {
+      billsIntroduced: parseInt(document.getElementById('p-billsIntroduced').value) || 0,
+      billsPassed: parseInt(document.getElementById('p-billsPassed').value) || 0,
+      billsUnamended: parseInt(document.getElementById('p-billsUnamended').value) || 0,
+      urgencyMotions: parseInt(document.getElementById('p-urgencyMotions').value) || 0,
+      committeeReferrals: parseInt(document.getElementById('p-committeeReferrals').value) || 0,
+      avgDays: parseInt(document.getElementById('p-avgDays').value) || 0,
+      oppositionRatio: document.getElementById('p-oppositionRatio').value,
+      urgencySubjects: document.getElementById('p-urgencySubjects').value,
+      notes: document.getElementById('p-notes').value
+    };
+    saveData(data);
+    showSuccess('parl-success');
+    populateQuarterSelects();
+    renderAll();
+  }
+
+  function saveJudicial() {
+    const q = document.getElementById('jud-quarter').value;
+    const data = loadData();
+    if (!data[q]) data[q] = {};
+    data[q].judicial = {
+      casesFiled: parseInt(document.getElementById('j-casesFiled').value) || 0,
+      casesDecided: parseInt(document.getElementById('j-casesDecided').value) || 0,
+      casesPending: parseInt(document.getElementById('j-casesPending').value) || 0,
+      stateWins: parseInt(document.getElementById('j-stateWins').value) || 0,
+      stateLosses: parseInt(document.getElementById('j-stateLosses').value) || 0,
+      avgDays: parseInt(document.getElementById('j-avgDays').value) || 0,
+      provisions: document.getElementById('j-provisions').value,
+      notableCases: document.getElementById('j-notableCases').value,
+      notes: document.getElementById('j-notes').value
+    };
+    saveData(data);
+    showSuccess('jud-success');
+    populateQuarterSelects();
+    renderAll();
+  }
+
+  function saveElectoral() {
+    const q = document.getElementById('elec-quarter').value;
+    const data = loadData();
+    if (!data[q]) data[q] = {};
+    data[q].electoral = {
+      registrationDecisions: parseInt(document.getElementById('e-registrationDecisions').value) || 0,
+      registrationRefusals: parseInt(document.getElementById('e-registrationRefusals').value) || 0,
+      boundaryDeterminations: parseInt(document.getElementById('e-boundaryDeterminations').value) || 0,
+      eligibilityRulings: parseInt(document.getElementById('e-eligibilityRulings').value) || 0,
+      candidateRulings: parseInt(document.getElementById('e-candidateRulings').value) || 0,
+      rulingAppeals: parseInt(document.getElementById('e-rulingAppeals').value) || 0,
+      refusalDetails: document.getElementById('e-refusalDetails').value,
+      notableDecisions: document.getElementById('e-notableDecisions').value,
+      notes: document.getElementById('e-notes').value
+    };
+    saveData(data);
+    showSuccess('elec-success');
+    populateQuarterSelects();
+    renderAll();
+  }
+
+  function showSuccess(id) {
+    const el = document.getElementById(id);
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 3000);
+  }
+
+  // ─────────────────────────────────────────────
+  // RENDER FUNCTIONS
+  // ─────────────────────────────────────────────
+  function pct(a, b) {
+    if (!b || b === 0) return '—';
+    return Math.round((a / b) * 100) + '%';
+  }
+
+  function ratioCell(value) {
+    if (!value) return '—';
+    const cls = { high: 'pill-high', medium: 'pill-medium', low: 'pill-low' }[value] || '';
+    const labels = { high: 'High', medium: 'Medium', low: 'Low' };
+    return `<span class="indicator-pill ${cls}">${labels[value] || value}</span>`;
+  }
+
+  function noteCell(text) {
+    if (!text) return '<td class="notes-cell">—</td>';
+    let badgeClass = 'badge-pending';
+    let badgeLabel = 'Pending';
+    const upper = text.toUpperCase();
+    if (upper.startsWith('VERIFIED')) { badgeClass = 'badge-verified'; badgeLabel = 'Verified'; }
+    else if (upper.startsWith('PARTIALLY VERIFIED')) { badgeClass = 'badge-partial'; badgeLabel = 'Partial'; }
+    else if (upper.startsWith('CURRENT QUARTER')) { badgeClass = 'badge-current'; badgeLabel = 'Current'; }
+    // Strip the prefix label from display text
+    const clean = text
+      .replace(/^(CURRENT QUARTER — PENDING\.|CURRENT QUARTER —|PARTIALLY VERIFIED \([^)]+\)\.|PARTIALLY VERIFIED \([^)]+\)|VERIFIED \([^)]+\)\.|VERIFIED \([^)]+\)|VERIFIED —|PENDING —)\s*/i, '')
+      .trim();
+    const preview = clean.length > 100 ? clean.substring(0, 100) + '…' : clean;
+    const escaped = text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return `<td class="notes-cell"><span class="status-badge ${badgeClass}">${badgeLabel}</span><span class="note-text" title="${escaped}">${preview}</span></td>`;
+  }
+
+  function renderParliamentaryTable() {
+    const data = loadData();
+    const filter = document.getElementById('parl-view-quarter')?.value || 'all';
+    const tbody = document.getElementById('parlTableBody');
+    const quarters = Object.keys(data).sort();
+    const rows = quarters.filter(q => data[q].parliamentary && (filter === 'all' || q === filter));
+
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" class="empty-table">No parliamentary data recorded yet.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = rows.map(q => {
+      const p = data[q].parliamentary;
+      const uPct = pct(p.billsUnamended, p.billsPassed);
+      return `<tr>
+        <td>${formatQuarterLabel(q)}</td>
+        <td>${p.billsIntroduced || '—'}</td>
+        <td>${p.billsPassed || '—'}</td>
+        <td>${uPct}</td>
+        <td>${p.urgencyMotions || '—'}</td>
+        <td>${p.committeeReferrals || '—'}</td>
+        <td>${p.avgDays ? p.avgDays + ' d' : '—'}</td>
+        <td>${ratioCell(p.oppositionRatio)}</td>
+        ${noteCell(p.notes)}
+      </tr>`;
+    }).join('');
+  }
+
+  function renderJudicialTable() {
+    const data = loadData();
+    const filter = document.getElementById('jud-view-quarter')?.value || 'all';
+    const tbody = document.getElementById('judTableBody');
+    const quarters = Object.keys(data).sort();
+    const rows = quarters.filter(q => data[q].judicial && (filter === 'all' || q === filter));
+
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" class="empty-table">No judicial data recorded yet.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = rows.map(q => {
+      const j = data[q].judicial;
+      const total = (j.stateWins || 0) + (j.stateLosses || 0);
+      const wr = total ? pct(j.stateWins, total) : '—';
+      return `<tr>
+        <td>${formatQuarterLabel(q)}</td>
+        <td>${j.casesFiled || '—'}</td>
+        <td>${j.casesDecided || '—'}</td>
+        <td>${j.casesPending || '—'}</td>
+        <td>${j.stateWins || '—'}</td>
+        <td>${j.stateLosses || '—'}</td>
+        <td>${wr}</td>
+        <td>${j.avgDays ? j.avgDays + ' d' : '—'}</td>
+        ${noteCell(j.provisions)}
+      </tr>`;
+    }).join('');
+  }
+
+  function renderElectoralTable() {
+    const data = loadData();
+    const filter = document.getElementById('elec-view-quarter')?.value || 'all';
+    const tbody = document.getElementById('elecTableBody');
+    const quarters = Object.keys(data).sort();
+    const rows = quarters.filter(q => data[q].electoral && (filter === 'all' || q === filter));
+
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8" class="empty-table">No electoral administration data recorded yet.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = rows.map(q => {
+      const e = data[q].electoral;
+      return `<tr>
+        <td>${formatQuarterLabel(q)}</td>
+        <td>${e.registrationDecisions || '—'}</td>
+        <td>${e.registrationRefusals || 0}</td>
+        <td>${e.boundaryDeterminations || '—'}</td>
+        <td>${e.eligibilityRulings || '—'}</td>
+        <td>${e.candidateRulings || '—'}</td>
+        <td>${e.rulingAppeals || '—'}</td>
+        ${noteCell(e.notableDecisions)}
+      </tr>`;
+    }).join('');
+  }
+
+  function renderSummaryTable() {
+    const data = loadData();
+    const quarters = Object.keys(data).sort();
+    const tbody = document.getElementById('summaryTableBody');
+
+    if (quarters.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8" class="empty-table">No data recorded yet. Use Staff Mode to enter the first quarter.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = quarters.map(q => {
+      const p = data[q].parliamentary || {};
+      const j = data[q].judicial || {};
+      const e = data[q].electoral || {};
+      const jTotal = (j.stateWins || 0) + (j.stateLosses || 0);
+      return `<tr>
+        <td>${formatQuarterLabel(q)}</td>
+        <td>${p.billsPassed || '—'}</td>
+        <td>${pct(p.billsUnamended, p.billsPassed)}</td>
+        <td>${p.urgencyMotions || '—'}</td>
+        <td>${j.casesDecided || '—'}</td>
+        <td>${jTotal ? pct(j.stateWins, jTotal) : '—'}</td>
+        <td>${(e.eligibilityRulings || 0) + (e.candidateRulings || 0) || '—'}</td>
+        <td>${e.registrationRefusals || 0}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderOverviewCards() {
+    const data = loadData();
+    const quarters = Object.keys(data).sort();
+    const grid = document.getElementById('overviewGrid');
+
+    const latestQ = quarters[quarters.length - 1];
+    const p = latestQ && data[latestQ].parliamentary ? data[latestQ].parliamentary : null;
+    const j = latestQ && data[latestQ].judicial ? data[latestQ].judicial : null;
+    const e = latestQ && data[latestQ].electoral ? data[latestQ].electoral : null;
+
+    const ql = latestQ ? formatQuarterLabel(latestQ) : 'No data';
+
+    grid.innerHTML = `
+      <div class="domain-card">
+        <div class="domain-card-label">Domain I — ${ql}</div>
+        <div class="domain-card-title">Parliamentary Practice</div>
+        ${p ? `<div class="domain-card-stats">
+          <div class="stat-row"><span class="stat-label">Bills passed</span><span class="stat-value">${p.billsPassed}</span></div>
+          <div class="stat-row"><span class="stat-label">Passed unamended</span><span class="stat-value highlight">${pct(p.billsUnamended, p.billsPassed)}</span></div>
+          <div class="stat-row"><span class="stat-label">Urgency motions</span><span class="stat-value">${p.urgencyMotions}</span></div>
+          <div class="stat-row"><span class="stat-label">Opposition ratio</span><span class="stat-value">${p.oppositionRatio || '—'}</span></div>
+        </div>` : `<div class="no-data-msg">No data recorded</div>`}
+      </div>
+      <div class="domain-card">
+        <div class="domain-card-label">Domain II — ${ql}</div>
+        <div class="domain-card-title">Judicial Practice</div>
+        ${j ? `<div class="domain-card-stats">
+          <div class="stat-row"><span class="stat-label">Cases decided</span><span class="stat-value">${j.casesDecided}</span></div>
+          <div class="stat-row"><span class="stat-label">State win rate</span><span class="stat-value highlight">${pct(j.stateWins, (j.stateWins||0)+(j.stateLosses||0))}</span></div>
+          <div class="stat-row"><span class="stat-label">Cases pending</span><span class="stat-value">${j.casesPending}</span></div>
+          <div class="stat-row"><span class="stat-label">Avg. days to judgment</span><span class="stat-value">${j.avgDays ? j.avgDays+'d' : '—'}</span></div>
+        </div>` : `<div class="no-data-msg">No data recorded</div>`}
+      </div>
+      <div class="domain-card">
+        <div class="domain-card-label">Domain III — ${ql}</div>
+        <div class="domain-card-title">Electoral Administration</div>
+        ${e ? `<div class="domain-card-stats">
+          <div class="stat-row"><span class="stat-label">Registration decisions</span><span class="stat-value">${e.registrationDecisions}</span></div>
+          <div class="stat-row"><span class="stat-label">Refusals</span><span class="stat-value highlight">${e.registrationRefusals}</span></div>
+          <div class="stat-row"><span class="stat-label">Eligibility rulings</span><span class="stat-value">${e.eligibilityRulings}</span></div>
+          <div class="stat-row"><span class="stat-label">Rulings appealed</span><span class="stat-value">${e.rulingAppeals}</span></div>
+        </div>` : `<div class="no-data-msg">No data recorded</div>`}
+      </div>
+    `;
+  }
+
+  function renderAll() {
+    renderOverviewCards();
+    renderSummaryTable();
+    renderParliamentaryTable();
+    renderJudicialTable();
+    renderElectoralTable();
+  }
+
+  // ─────────────────────────────────────────────
+  // TAB NAVIGATION
+  // ─────────────────────────────────────────────
+  function switchTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ─────────────────────────────────────────────
+  // STAFF MODE
+  // ─────────────────────────────────────────────
+  let staffMode = false;
+
+  function toggleStaff() {
+    staffMode = !staffMode;
+    document.querySelectorAll('.staff-panel').forEach(p => {
+      p.classList.toggle('visible', staffMode);
+    });
+    const btn = document.getElementById('staffToggle');
+    btn.classList.toggle('active', staffMode);
+    btn.textContent = staffMode ? 'Exit Staff Mode' : 'Staff Mode';
+  }
+
+  // ─────────────────────────────────────────────
+  // SAMPLE DATA SEED
+  // ─────────────────────────────────────────────
+  const SAMPLE_DATA = {
+    '2023-Q1': {
+      parliamentary: {
+        billsIntroduced: 0, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 0, avgDays: 0,
+        oppositionRatio: '',
+        urgencySubjects: '',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj, September 2024 edition). No bills were tabled in Q1 2023. Parliament convened under Rabuka coalition government (sworn in 24 December 2022) and was in its establishment phase: Speaker election, committee formation, procedural setup. Hansard confirms Parliament sat from at least 17 February 2023. No legislation introduced this quarter. PENDING: Opposition speaking ratio requires Hansard review. Judicial and electoral domain data requires separate sourcing from PacLII and Elections Office.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '',
+        notableCases: '',
+        notes: 'PENDING — source from PacLII (paclii.org) and Citizens Constitutional Forum. Filter Fiji High Court constitutional matters Jan–Mar 2023.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '',
+        notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices (elections.org.fj) for Q1 2023 decisions.'
+      }
+    },
+    '2023-Q2': {
+      parliamentary: {
+        billsIntroduced: 15, billsPassed: 2, billsUnamended: 2,
+        urgencyMotions: 2, committeeReferrals: 0, avgDays: 3,
+        oppositionRatio: '',
+        urgencySubjects: 'Bill 1: Media Industry Development (Repeal) Act 2023; Bill 2: iTaukei Land Trust (Amendment) Act 2023',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj). Bills 1 and 2 introduced and passed under SO51 (urgency procedure) 3–6 April 2023. Neither referred to any standing committee. Bills 3–15 (budget package, 13 bills) introduced 30 June 2023 — not passed until Q3. Avg days of 3 covers only the 2 bills actually passed in Q2. Bills passed unamended proxy: no committee referral recorded; floor amendments cannot be confirmed without Hansard. Notable: Media Industry Development (Repeal) Act reversed Bainimarama-era media regulation — the first substantive legislative acts of the Rabuka government, both under urgency. PENDING: Opposition speaking ratio requires Hansard review. Judicial and electoral domains require separate sourcing.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '', notableCases: '',
+        notes: 'PENDING — source from PacLII and CCF for Apr–Jun 2023.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q2 2023.'
+      }
+    },
+    '2023-Q3': {
+      parliamentary: {
+        billsIntroduced: 10, billsPassed: 22, billsUnamended: 21,
+        urgencyMotions: 4, committeeReferrals: 1, avgDays: 14,
+        oppositionRatio: '',
+        urgencySubjects: 'Bill 16: Liquor (Amendment); Bill 20: High Court (Amendment); Bill 22: Drainage (Amendment); Bill 23: State Lands (Amendment)',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj). Heaviest legislative quarter of 2023. Bills passed includes 13 budget-package bills (Bills 3–15, introduced Q2, passed 13–14 July) plus 9 further acts (Bills 16–24). Four bills explicitly moved under SO51 urgency. One committee referral: Heritage Bill (Bill 25) referred to Standing Committee on Justice, Law and Human Rights on 15 September 2023 — notably, despite being introduced under SO51, it was not immediately enacted. Bills passed unamended: 21 confirmed not referred to committee; floor amendment status requires Hansard. Avg days is approximate: budget bills ~14 days (introduced 30 June, passed 13–14 July); SO51 bills ~3 days. PENDING: Opposition speaking ratio requires Hansard review. Judicial and electoral domains require separate sourcing.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '', notableCases: '',
+        notes: 'PENDING — source from PacLII and CCF for Jul–Sep 2023.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q3 2023.'
+      }
+    },
+    '2023-Q4': {
+      parliamentary: {
+        billsIntroduced: 4, billsPassed: 4, billsUnamended: 4,
+        urgencyMotions: 1, committeeReferrals: 0, avgDays: 2,
+        oppositionRatio: '',
+        urgencySubjects: 'Bill 26: iTaukei Affairs (Amendment) Act 2023',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj). Bills 26–29 introduced 21 November 2023; Bill 26 explicitly moved under SO51 and passed 23 November. Bills 27–29 (Employment Relations, Mahogany Industry Development, Local Government No.2) also passed as Acts 26–28 of 2023. None referred to committee. Avg days: Bills 26–29 introduced 21 November, at least Bill 26 passed 23 November = 2 days. PENDING: Opposition speaking ratio requires Hansard review. Judicial and electoral domains require separate sourcing.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '', notableCases: '',
+        notes: 'PENDING — source from PacLII and CCF for Oct–Dec 2023.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q4 2023.'
+      }
+    },
+    '2024-Q1': {
+      parliamentary: {
+        billsIntroduced: 0, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 0, avgDays: 0,
+        oppositionRatio: '',
+        urgencySubjects: '',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj). No bills tabled in Q1 2024. First bill of 2024 was tabled 20 May 2024 (Q2). Parliament does not appear to have sat for legislative purposes in Jan–Mar 2024. PENDING: Confirm via parliament.gov.fj sitting calendar whether Parliament sat at all in Q1 2024.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '', notableCases: '',
+        notes: 'PENDING — source from PacLII and CCF for Jan–Mar 2024.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q1 2024.'
+      }
+    },
+    '2024-Q2': {
+      parliamentary: {
+        billsIntroduced: 16, billsPassed: 2, billsUnamended: 2,
+        urgencyMotions: 3, committeeReferrals: 2, avgDays: 3,
+        oppositionRatio: '',
+        urgencySubjects: 'Bill 2: Corrections Service (Amendment); Bill 3: Meteorological and Hydrological Services Act; Bill 4: Child Justice Bill (also SO51)',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj). Bills 1–6 tabled 20–23 May 2024; Bills 7–16 (budget package) tabled 28 June 2024. Bills 2 and 3 passed under SO51 on 23 May 2024; neither referred to committee. Budget bills 7–16 introduced 28 June, not passed until Q3. Two committee referrals: Bill 1 (Anti-Doping) referred to Standing Committee on Justice, Law and Human Rights 20 May; Bill 4 (Child Justice) also referred to committee. Notable increase in committee referrals vs 2023 pattern. Avg days covers only 2 bills passed in Q2, both introduced and passed within 3 days under SO51. PENDING: Opposition speaking ratio requires Hansard review. Judicial and electoral domains require separate sourcing.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '', notableCases: '',
+        notes: 'PENDING — source from PacLII and CCF for Apr–Jun 2024.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q2 2024.'
+      }
+    },
+    '2024-Q3': {
+      parliamentary: {
+        billsIntroduced: 1, billsPassed: 10, billsUnamended: 10,
+        urgencyMotions: 1, committeeReferrals: 0, avgDays: 13,
+        oppositionRatio: '',
+        urgencySubjects: 'Bills 7–16: 2024–2025 budget package (Appropriation under SO84/99; consequential tax bills under SO51)',
+        notes: 'VERIFIED — Parliament Sitting Statistics (parliament.gov.fj). Budget-package bills 7–16 (introduced 28 June Q2) passed in July 2024: Appropriation Bill passed 11 July, Tax Administration passed 12 July, remaining budget bills passed July 2024. None referred to committee. SO51 used for consequential tax bills; Appropriation moved under SO84(1) and 99. Avg days approximate: bills introduced 28 June, passed 11–12 July = ~13 days. One additional bill tabled in Q3 per sitting stats; full Q3 tabling data requires verification against September 2024 sitting calendar. Total 2024 Acts to September = 12, with Acts 1–2 passed May and Acts 3–12 passed July. PENDING: Opposition speaking ratio requires Hansard review. Judicial and electoral domains require separate sourcing.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '', notableCases: '',
+        notes: 'PENDING — source from PacLII and CCF for Jul–Sep 2024.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q3 2024.'
+      }
+    },
+    '2025-Q1': {
+      parliamentary: {
+        billsIntroduced: 8, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 0, avgDays: 0,
+        oppositionRatio: 'medium',
+        urgencySubjects: '',
+        notes: 'VERIFIED (parliament.gov.fj bills page; Fiji Sun; PINA). Eight bills introduced via gazette notices 2–10 March 2025: Bill 1 Constitution (Amendment), Bill 2 Cinematographic Films (Amendment), Bill 3 Land Transport (Amendment), Bill 4 Code of Conduct, Bill 5 Access to Information, Bill 6 Accountability and Transparency Commission, Bill 7 Work Care, Bill 8 Accident Compensation (Amendment). CRITICAL EVENT: Constitution (Amendment) Bill 2025 DEFEATED at second reading 12 March 2025. Vote: 40 in favour, 14 against, 1 not voting. Required 41 (75% of 55 seats, per Standing Order 93(1)(b)). Government fell one vote short after 10+ hours of debate. Bill proposed reducing amendment threshold from three-quarters to two-thirds parliamentary majority and replacing three-quarters-of-all-registered-voters referendum requirement with simple majority of valid votes cast. Bills passed in Q1: 0 confirmed. Status of Bills 2–8 requires Hansard verification. Opposition ratio scored medium: participated fully in constitutional debate, voted against the Bill. PENDING: Bills passed, committee referrals, avg days require sitting statistics.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '',
+        notableCases: '',
+        notes: 'PENDING — source from PacLII for Jan–Mar 2025. Supreme Court advisory proceedings (Misc. Action No. 01/2025) filed Q2 2025; see Q2 and Q3 entries.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q1 2025.'
+      }
+    },
+    '2025-Q2': {
+      parliamentary: {
+        billsIntroduced: 3, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 0, avgDays: 0,
+        oppositionRatio: '',
+        urgencySubjects: '',
+        notes: 'PARTIALLY VERIFIED (PINA; East Asia Forum; parliament.gov.fj). Following defeat of Constitution Amendment Bill, Cabinet formally agreed 6 May 2025 to seek Supreme Court advisory opinion. Budget bills expected introduced late June 2025 following established pattern. Full Q2 bill count and passage data requires the 2025 Parliament Sitting Statistics document. PENDING: bill count, urgency motions, committee referrals require official verification.'
+      },
+      judicial: {
+        casesFiled: 1, casesDecided: 0, casesPending: 1,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: 'Sections 159 and 160 (constitutional amendment provisions)',
+        notableCases: 'VERIFIED (International IDEA; Lexology). Miscellaneous Action No. 01 of 2025. Cabinet lodged reference to Supreme Court 6 May 2025 under Section 91(5) of the Constitution, seeking advisory opinion on whether Sections 159 and 160 (amendment provisions) are binding and whether the 1997 Constitution remains valid. Advisory reference — not adversarial litigation. Nine interveners participated. Panel: Chief Justice Salesi Temo, Justices Arnold, Goddard, Young, French, and Mataitoga. First use of Section 91(5) in relation to the 2013 Constitution\'s amendment provisions.',
+        notes: 'VERIFIED. Filed approximately 6 May 2025. Extraordinary sitting scheduled for August 2025. Most significant constitutional proceeding since the 2013 Constitution came into force.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '', notableDecisions: '',
+        notes: 'PENDING — source from Fijian Elections Office gazette notices for Q2 2025.'
+      }
+    },
+    '2025-Q3': {
+      parliamentary: {
+        billsIntroduced: 5, billsPassed: 14, billsUnamended: 13,
+        urgencyMotions: 1, committeeReferrals: 1, avgDays: 13,
+        oppositionRatio: '',
+        urgencySubjects: '2025-2026 Appropriation Bill (SO84/99); consequential budget amendment bills (SO51)',
+        notes: 'PARTIALLY VERIFIED (parliament.gov.fj acts page; East Asia Forum). Acts 12–25 of 2025 include the 2025–2026 budget package plus Fisheries Act 2025 (Act 24) and Adoption Act 2025 (Act 25), passed in July 2025 following established pattern. Budget introduced late June, passed mid-July. NOTABLE: Quarantine (Amendment) Bill 2025 (Bill 31) explicitly noted as passed "with amendments" on the parliament.gov.fj bills page — the first bill in the tracker\'s entire record confirmed amended before passage, breaking the pattern of near-total unamended passage. Full Q3 bill count requires 2025 sitting statistics. PENDING: opposition ratio, exact passage dates.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 1, casesPending: 0,
+        stateWins: 1, stateLosses: 0, avgDays: 107,
+        provisions: 'Sections 159 and 160 (amendment provisions); Section 91(5) (advisory opinion power)',
+        notableCases: 'VERIFIED (ConstitutionNet — Kant and Chung, 17 September 2025; International IDEA; RNZ; Lexology). Misc. Action No. 01/2025. Supreme Court extraordinary sitting broadcast live 18–20 August 2025. Advisory opinion delivered August 2025. HOLDINGS: (1) 2013 Constitution legally valid despite coup origins and limited consultation — democratic deficit acknowledged but Constitution recognised as lawful. (2) Amendment provisions render Constitution "virtually unamendable." (3) Supermajority requirements read down: amendments now require two-thirds parliamentary majority and simple majority of valid votes cast in national referendum. Most constitutionally significant judicial event since 2013.',
+        notes: 'VERIFIED. State win scored: government\'s primary objective — a workable amendment pathway — achieved, though via judicial reading-down rather than the government\'s preferred approach of invalidating the provisions. Avg days: filed ~6 May 2025, opinion delivered ~August 2025 = ~107 days.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '',
+        notableDecisions: 'VERIFIED (East Asia Forum). Review of Fiji\'s Electoral Legislation completed July 2025. Report not publicly released or tabled in Parliament. Details of proposed new voting system leaked to local media by a Commissioner in November 2025, drawing reprimand from Acting Attorney-General.',
+        notes: 'PENDING for routine decisions. Undisclosed Electoral Legislation Review is a transparency concern directly relevant to this domain. Source gazette notices from elections.org.fj for Q3 2025.'
+      }
+    },
+    '2025-Q4': {
+      parliamentary: {
+        billsIntroduced: 3, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 1, avgDays: 0,
+        oppositionRatio: '',
+        urgencySubjects: '',
+        notes: 'VERIFIED (RNZ; PINA; parliament.gov.fj bills page). National Referendum Bill 2025 introduced 4 December 2025 — the final sitting day of Parliament for the year. Immediately referred to Standing Committee on Justice, Law and Human Rights. Bill establishes the legal framework for conducting a constitutional referendum under the pathway opened by the August 2025 Supreme Court advisory opinion. Civil society opposition: Fiji Labour Party called it unconstitutional; Fiji Women\'s Rights Movement warned Section 23 criminalises ordinary advocacy; FCOSS criticised the five-day notice period for publishing referendum questions; University of Fiji raised constitutional foundation concerns; former Attorney-General Sayed-Khaiyum, appearing before committee in late March 2026, stated the Bill was "antithetical to its stated objective." Bills 32 (Fiji Learning Institute for Public Service) and 33 (Fisheries Amendment) also introduced in Q4. PENDING: full bill count and opposition ratio require official verification.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '',
+        notableCases: '',
+        notes: 'PENDING — source from PacLII for Oct–Dec 2025. Early signs reported that the Supreme Court may consider interpretation questions related to the National Referendum Bill 2025 (East Asia Forum, January 2026).'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '',
+        notableDecisions: 'VERIFIED (East Asia Forum). Details of proposed new voting system from the completed Electoral Legislation Review leaked to media November 2025 by a Commissioner, drawing reprimand from Acting Attorney-General. Review report not tabled in Parliament as of end-2025.',
+        notes: 'PENDING for routine decisions. Undisclosed Electoral Legislation Review is a material transparency gap. Source gazette notices from elections.org.fj for Q4 2025.'
+      }
+    },
+    '2026-Q1': {
+      parliamentary: {
+        billsIntroduced: 0, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 0, avgDays: 0,
+        oppositionRatio: '',
+        urgencySubjects: '',
+        notes: 'PARTIALLY VERIFIED (Fijivillage; University of Fiji; RNZ; PINA). Parliament does not appear to have sat for bill-passing purposes in Q1 2026 (January–March). Standing Committee on Justice, Law and Human Rights conducted extensive public consultation tours on the National Referendum Bill 2025 (Bill 46 of 2025) throughout Q1: public submissions in Suva began 19 January 2026; University of Fiji made submissions in February 2026; former Attorney-General Aiyaz Sayed-Khaiyum appeared before the committee 30 March 2026. Committee also reviewing Education Bill No. 34 of 2025 and Criminal Records Bill No. 41 of 2025. Committee report on National Referendum Bill expected in 2026 before final debate and vote. General election due August 2026–February 2027 creates legislative urgency for remainder of this parliamentary term. PENDING: bill introductions and passages for Q1 2026 require official sitting records; confirm via parliament.gov.fj sitting calendar whether Parliament sat for legislative business in Q1 2026.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '',
+        notableCases: '',
+        notes: 'PENDING — source from PacLII for Jan–Mar 2026. East Asia Forum (January 2026) noted early signs the Supreme Court may consider interpretation questions related to the National Referendum Bill.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '',
+        notableDecisions: 'VERIFIED (East Asia Forum). Constitutional review scheduled to take place in 2026. Electoral Legislation Review from July 2025 still not publicly tabled as of Q1 2026. General election expected August 2026–February 2027, making electoral administration decisions in this period of heightened tracker relevance.',
+        notes: 'PENDING for routine decisions. Source gazette notices from elections.org.fj for Q1 2026. Note: with election approaching, all electoral administration decisions this year require closer scrutiny.'
+      }
+    },
+    '2026-Q2': {
+      parliamentary: {
+        billsIntroduced: 0, billsPassed: 0, billsUnamended: 0,
+        urgencyMotions: 0, committeeReferrals: 0, avgDays: 0,
+        oppositionRatio: '',
+        urgencySubjects: '',
+        notes: 'CURRENT QUARTER (April–June 2026). PARTIALLY VERIFIED (Facebook/fijiparliament; PINA). Parliament confirmed sitting 30 April 2026 — four sessions held (9:30am, 11:30am, 2:30pm, 4:30pm), indicating a substantive sitting day. PINA analysis published 21 April 2026 notes the Standing Committee on Justice, Law and Human Rights report on the National Referendum Bill 2025 is still expected — committee had not yet reported as of that date. Likely legislative priorities this quarter: National Referendum Bill final reading; budget introduction (expected late May/June following established pattern); possible electoral reform legislation ahead of general election. PENDING: All Q2 2026 figures require real-time sourcing from parliament.gov.fj Hansard and sitting statistics as the quarter unfolds.'
+      },
+      judicial: {
+        casesFiled: 0, casesDecided: 0, casesPending: 0,
+        stateWins: 0, stateLosses: 0, avgDays: 0,
+        provisions: '',
+        notableCases: '',
+        notes: 'CURRENT QUARTER — PENDING. Source from PacLII as judgments are published. Any challenges to the National Referendum Bill or electoral reform legislation would be of high tracker significance.'
+      },
+      electoral: {
+        registrationDecisions: 0, registrationRefusals: 0,
+        boundaryDeterminations: 0, eligibilityRulings: 0,
+        candidateRulings: 0, rulingAppeals: 0,
+        refusalDetails: '',
+        notableDecisions: 'CURRENT QUARTER — PENDING. With general election due August 2026–February 2027, all electoral administration decisions from Q2 2026 onwards are of direct constitutional significance. Source gazette notices from elections.org.fj in real time.',
+        notes: 'CURRENT QUARTER — PENDING. Electoral Legislation Review still undisclosed. Any tabling of the review report in Parliament this quarter would be a major tracker event.'
+      }
+    }
+  };
+
+  const DATA_VERSION = '5';
+
+  function seedSampleData() {
+    const storedVersion = localStorage.getItem('fpr_monitor_version');
+    if (storedVersion !== DATA_VERSION) {
+      saveData(SAMPLE_DATA);
+      localStorage.setItem('fpr_monitor_sample', '1');
+      localStorage.setItem('fpr_monitor_version', DATA_VERSION);
+    }
+  }
+
+  function clearSampleData() {
+    if (confirm('Clear all sample data? This cannot be undone.')) {
+      localStorage.removeItem('fpr_monitor');
+      localStorage.removeItem('fpr_monitor_sample');
+      document.getElementById('sampleDataBanner').style.display = 'none';
+      populateQuarterSelects();
+      renderAll();
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // BOOT
+  // ─────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    seedSampleData();
+    populateQuarterSelects();
+    renderAll();
+    if (localStorage.getItem('fpr_monitor_sample') === '1') {
+      document.getElementById('sampleDataBanner').style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

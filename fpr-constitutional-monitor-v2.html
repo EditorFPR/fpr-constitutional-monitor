@@ -757,11 +757,11 @@
 
 <nav>
   <div class="nav-inner">
-    <button class="nav-tab active" onclick="switchTab('overview')">Overview</button>
-    <button class="nav-tab" onclick="switchTab('parliamentary')">Parliamentary</button>
-    <button class="nav-tab" onclick="switchTab('judicial')">Judicial</button>
-    <button class="nav-tab" onclick="switchTab('electoral')">Electoral Administration</button>
-    <button class="nav-tab" onclick="switchTab('methodology')">Methodology</button>
+    <button class="nav-tab active" onclick="switchTab('overview', this)">Overview</button>
+    <button class="nav-tab" onclick="switchTab('parliamentary', this)">Parliamentary</button>
+    <button class="nav-tab" onclick="switchTab('judicial', this)">Judicial</button>
+    <button class="nav-tab" onclick="switchTab('electoral', this)">Electoral Administration</button>
+    <button class="nav-tab" onclick="switchTab('methodology', this)">Methodology</button>
   </div>
 </nav>
 
@@ -1643,11 +1643,11 @@
   // ─────────────────────────────────────────────
   // TAB NAVIGATION
   // ─────────────────────────────────────────────
-  function switchTab(id) {
+  function switchTab(id, el) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
   }
 
   // ─────────────────────────────────────────────

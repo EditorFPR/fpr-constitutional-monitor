@@ -165,8 +165,8 @@
       </div>
 
       <div class="alert" id="sampleDataBanner" style="display:none; background:rgba(74,124,89,0.08); border-color:rgba(74,124,89,0.4); border-left-color:#4a7c59;">
-        <strong class="alert-title" style="color:#4a7c59;">✓ Parliamentary Data: Verified — Judicial &amp; Electoral: Pending</strong>
-        Parliamentary indicators for 2023 Q1 – 2026 Q2 are populated from verified public documents. Judicial and electoral domain fields are marked PENDING and require sourcing from PacLII and the Fijian Elections Office respectively. <button onclick="clearSampleData()" style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:1px solid #4a7c59;color:#4a7c59;padding:3px 10px;border-radius:2px;cursor:pointer;margin-left:8px;">Clear All Data</button>
+        <strong class="alert-title" style="color:#4a7c59;">✓ Parliamentary Data: Verified — Electoral: Partial — Judicial: Partial</strong>
+        Parliamentary indicators for 2023 Q1 – 2026 Q2 are populated from verified public documents. Electoral administration is partial, with party registration data recorded for April 2026. Judicial practice is partial, with cases recorded from Q4 2024 to Q2 2026 sourced from PacLII and Fiji Judiciary published judgments (judiciary.gov.fj); some case outcomes pending verification. Coverage may not reflect all constitutional proceedings. <button onclick="clearSampleData()" style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:1px solid #4a7c59;color:#4a7c59;padding:3px 10px;border-radius:2px;cursor:pointer;margin-left:8px;">Clear All Data</button>
       </div>
 
       <div class="alert">
@@ -257,7 +257,7 @@
       <div class="section-header">
         <div class="section-label">Domain II</div>
         <h2 class="section-title">Judicial Practice</h2>
-        <p class="section-desc">Tracks constitutional cases decided, state win rates, provisions litigated (by section), and court level distribution. Sourced from PacLII published judgments. Coverage may not reflect all constitutional proceedings.</p>
+        <p class="section-desc">Tracks constitutional cases decided, state win rates, provisions litigated (by section), and court level distribution. Sourced from PacLII and Fiji Judiciary published judgments (judiciary.gov.fj). Coverage may not reflect all constitutional proceedings.</p>
       </div>
       <div class="staff-panel" id="staff-judicial">
         <div class="staff-panel-title">Record Judicial Data</div>
@@ -911,6 +911,39 @@
       "notes": "PENDING — source from Fijian Elections Office gazette notices for Q3 2024."
     }
   },
+  "2024-Q4": {
+    "parliamentary": {
+      "billsIntroduced": 0,
+      "billsPassed": 0,
+      "billsUnamended": 0,
+      "urgencyMotions": 0,
+      "committeeReferrals": 0,
+      "avgDays": 0,
+      "oppositionRatio": "",
+      "urgencySubjects": "",
+      "notes": "PENDING — Verify parliamentary data for Oct–Dec 2024 from parliament.gov.fj Sitting Statistics."
+    },
+    "judicial": {
+      "casesDecided": 1,
+      "stateWins": 1,
+      "stateLosses": 0,
+      "courtLevel": "High Court, Suva (Civil)",
+      "provisions": "s15(1), s44(4)",
+      "notableCases": "Vijendra Prakash v Chief Registrar & Ors (High Court Suva, 19 Nov 2024). Constitutional redress application struck out as abuse of process under s44(4). Adequate alternative remedies existed. s15(1) fair trial violation claimed; not upheld. Costs of $2,000 ordered. State prevailed.",
+      "notes": "PARTIALLY VERIFIED — Strike-out on abuse of process grounds. Courts limiting constitutional redress where alternative remedies exist under s44(4). No substantive determination of the s15(1) fair trial claim. Source: PacLII / judiciary.gov.fj."
+    },
+    "electoral": {
+      "registrationDecisions": 0,
+      "registrationRefusals": 0,
+      "boundaryDeterminations": 0,
+      "eligibilityRulings": 0,
+      "candidateRulings": 0,
+      "rulingAppeals": 0,
+      "refusalDetails": "",
+      "notableDecisions": "",
+      "notes": "PENDING — source from Fijian Elections Office gazette notices for Q4 2024."
+    }
+  },
   "2025-Q1": {
     "parliamentary": {
       "billsIntroduced": 8,
@@ -924,15 +957,13 @@
       "notes": "VERIFIED (parliament.gov.fj bills page; Fiji Sun; PINA). Eight bills introduced 2–10 March 2025. CRITICAL EVENT: Constitution (Amendment) Bill 2025 DEFEATED at second reading 12 March 2025. Vote: 40 in favour, 14 against, 1 not voting. Required 41 (75% of 55 seats). Government fell one vote short after 10+ hours of debate. Bill proposed reducing amendment threshold from three-quarters to two-thirds parliamentary majority."
     },
     "judicial": {
-      "casesFiled": 0,
-      "casesDecided": 0,
-      "casesPending": 0,
-      "stateWins": 0,
+      "casesDecided": 2,
+      "stateWins": 1,
       "stateLosses": 0,
-      "avgDays": 0,
-      "provisions": "",
-      "notableCases": "",
-      "notes": "PENDING — source from PacLII for Jan–Mar 2025. Supreme Court advisory proceedings (Misc. Action No. 01/2025) filed Q2 2025."
+      "courtLevel": "Court of Appeal (both cases)",
+      "provisions": "s26; s44",
+      "notableCases": "1. Waqaninavatu v State (Court of Appeal, 13 Mar 2025). Application for constitutional relief dismissed as abuse of process and subversive of the rule of law. State prevailed. 2. Baleidrokadroka v State (Court of Appeal, 28 Feb 2025). Whether sentencing court breached s26 (equal protection). Outcome pending verification — not included in win/loss count.",
+      "notes": "PARTIALLY VERIFIED — Win rate reflects confirmed outcome only (Waqaninavatu). Baleidrokadroka outcome requires verification from PacLII/judiciary.gov.fj. Source: PacLII / judiciary.gov.fj."
     },
     "electoral": {
       "registrationDecisions": 0,
@@ -960,14 +991,14 @@
     },
     "judicial": {
       "casesFiled": 1,
-      "casesDecided": 0,
+      "casesDecided": 1,
       "casesPending": 1,
-      "stateWins": 0,
+      "stateWins": 1,
       "stateLosses": 0,
-      "avgDays": 0,
-      "provisions": "Sections 159 and 160 (constitutional amendment provisions)",
-      "notableCases": "VERIFIED (International IDEA; Lexology). Miscellaneous Action No. 01 of 2025. Cabinet lodged reference to Supreme Court 6 May 2025 under Section 91(5) seeking advisory opinion on Sections 159 and 160. Nine interveners. First use of Section 91(5) in relation to the 2013 Constitution amendment provisions.",
-      "notes": "VERIFIED. Filed approximately 6 May 2025. Most significant constitutional proceeding since the 2013 Constitution came into force."
+      "courtLevel": "Magistrates Court, Suva (Sayed-Khaiyum); Supreme Court Original Jurisdiction pending (advisory reference filed Q2)",
+      "provisions": "s3, s15(3), s100(3)(4)(7), s163 (Sayed-Khaiyum); s91(5), s159, s160 (advisory reference filed Q2)",
+      "notableCases": "1. State v Sayed-Khaiyum & Saneem (Criminal Case No 548 of 2023, Magistrates Court Suva, 6 Jun 2025). Transfer ruling: State applied to transfer both defendants to High Court on grounds that constitutional questions — conflict between s163 (definition of public service) and s139 Crimes Act (civil service requirement) — exceed Magistrates Court interpretive jurisdiction under s100(7). Transfer granted. State win is procedural only; substantive constitutional questions remain undecided. 2. In re Constitutional Amendment Reference (Misc Action No 01/2025). Cabinet lodged reference to Supreme Court 6 May 2025 under s91(5) seeking advisory opinion on ss159 and 160. Nine interveners. First use of s91(5) under the 2013 Constitution. Filed Q2 2025 — decided Q3 2025.",
+      "notes": "PARTIALLY VERIFIED — Sayed-Khaiyum transfer verified (PacLII). Win is procedural; no substantive constitutional determination. Advisory reference filed Q2, decided Q3 — recorded in Q3. Source: PacLII / judiciary.gov.fj."
     },
     "electoral": {
       "registrationDecisions": 0,
@@ -994,15 +1025,14 @@
       "notes": "PARTIALLY VERIFIED (parliament.gov.fj acts page; East Asia Forum). Acts 12–25 of 2025 include 2025–2026 budget package plus Fisheries Act 2025 and Adoption Act 2025. NOTABLE: Quarantine (Amendment) Bill 2025 explicitly noted as passed \"with amendments\" — the first bill in the tracker record confirmed amended before passage, breaking the pattern of near-total unamended passage."
     },
     "judicial": {
-      "casesFiled": 0,
-      "casesDecided": 1,
-      "casesPending": 0,
-      "stateWins": 1,
+      "casesDecided": 2,
+      "stateWins": 0,
       "stateLosses": 0,
       "avgDays": 107,
-      "provisions": "Sections 159 and 160 (amendment provisions); Section 91(5) (advisory opinion power)",
-      "notableCases": "VERIFIED (ConstitutionNet; International IDEA; RNZ). Misc. Action No. 01/2025. Advisory opinion delivered August 2025. HOLDINGS: (1) 2013 Constitution legally valid. (2) Amendment provisions render Constitution virtually unamendable. (3) Supermajority requirements read down: amendments now require two-thirds parliamentary majority and simple majority of valid votes cast. Most constitutionally significant judicial event since 2013.",
-      "notes": "VERIFIED. State win scored: government primary objective — a workable amendment pathway — achieved via judicial reading-down. Avg days: filed ~6 May 2025, opinion delivered ~August 2025 = ~107 days."
+      "courtLevel": "Supreme Court Original Jurisdiction (advisory opinion); Court of Appeal (Ravakasai)",
+      "provisions": "s91(5), s98(3)(c), s159, s160, s173(4)(5), Ch10, Pt D Ch12 (advisory); s26(1), s15(1) (Ravakasai)",
+      "notableCases": "1. In re Constitutional Amendment Reference (Misc Action No 01/2025, Supreme Court Original Jurisdiction, 29 Aug 2025). Advisory opinion under s91(5) and s98(3)(c). HOLDINGS: (1) 2013 Constitution legally effective; 1997 Constitution has no residual validity. (2) s159(2)(c) not recognised. (3) s160(2)(b) read down from three-quarters to two-thirds of all MPs. (4) s160(6) read down to majority of those voting. Immunity provisions (Ch10, Pt D Ch12) upheld as unamendable. Advisory opinions excluded from win/loss per Monitor methodology — no adversarial parties. 2. Ravakasai v State (Court of Appeal, 3 Sep 2025). Claim of unequal treatment under s26(1) and fair trial rights under s15(1). Outcome pending verification — not included in win/loss count.",
+      "notes": "PARTIALLY VERIFIED — Advisory opinion excluded from win/loss per methodology. Ravakasai outcome pending verification. Most constitutionally significant judicial act under the 2013 Constitution to date. Avg days (advisory): filed 6 May 2025, delivered 29 Aug 2025 = 107 days. Source: PacLII / judiciary.gov.fj / ConstitutionNet / International IDEA / RNZ."
     },
     "electoral": {
       "registrationDecisions": 0,
@@ -1029,15 +1059,13 @@
       "notes": "VERIFIED (RNZ; PINA; parliament.gov.fj). National Referendum Bill 2025 introduced 4 December 2025 — the final sitting day of Parliament for the year. Immediately referred to Standing Committee on Justice, Law and Human Rights. Civil society opposition: Fiji Labour Party called it unconstitutional; Fiji Women's Rights Movement warned Section 23 criminalises ordinary advocacy; former Attorney-General Sayed-Khaiyum stated Bill was \"antithetical to its stated objective.\""
     },
     "judicial": {
-      "casesFiled": 0,
-      "casesDecided": 0,
-      "casesPending": 0,
+      "casesDecided": 2,
       "stateWins": 0,
       "stateLosses": 0,
-      "avgDays": 0,
-      "provisions": "",
-      "notableCases": "",
-      "notes": "PENDING — source from PacLII for Oct–Dec 2025."
+      "courtLevel": "Court of Appeal (Cava); High Court Constitutional Redress (Itinterunga)",
+      "provisions": "s26(1)(3) (Cava); unknown (Itinterunga)",
+      "notableCases": "1. Cava v Commissioner of Fiji Police Force (Court of Appeal, 23 Oct 2025). Constitutional rights under s26(1) and s26(3) — equality and freedom from discrimination — alleged infringement by police. Outcome pending verification. 2. Itinterunga Rae v Rabi Council of Leaders (High Court, 31 Dec 2025). Constitutional redress proceedings. Nature of constitutional claim and outcome pending verification.",
+      "notes": "PENDING VERIFICATION — Both cases decided Q4 2025, outcomes unverified. Win/loss will be updated on verification. s26 continues as most active substantive right in the period. Source: PacLII / judiciary.gov.fj."
     },
     "electoral": {
       "registrationDecisions": 0,
@@ -1107,7 +1135,13 @@
       "avgDays": 0,
       "provisions": "",
       "notableCases": "",
-      "notes": "CURRENT QUARTER — PENDING. Source from PacLII as judgments are published. Any challenges to the National Referendum Bill or electoral reform legislation would be of high tracker significance. Vuvale Union Section 51 compliance question on parliamentary record 25 May 2026 (Oral Question No. 65/2026)."
+      "casesDecided": 1,
+      "stateWins": 1,
+      "stateLosses": 0,
+      "courtLevel": "High Court, Suva",
+      "provisions": "s44(4)",
+      "notableCases": "Suresh Chandra v Chief Registrar & Ors (High Court Suva, 10 Apr 2026). Application for constitutional redress filed out of time; outside the 29 Nov 2024 – 16 Jun 2025 filing window. Application dismissed. State/respondents prevailed.",
+      "notes": "PARTIALLY VERIFIED — Timing rules under High Court (Constitutional Redress) Rules strictly applied. No substantive constitutional determination. Consistent with Q4 2024 pattern of procedural barriers limiting redress. Any challenges to the National Referendum Bill or electoral reform legislation remain of high tracker significance. Vuvale Union s51 compliance question on parliamentary record 25 May 2026 (Oral Question No. 65/2026). Source: PacLII / judiciary.gov.fj."
     },
     "electoral": {
       "registrationDecisions": 3,

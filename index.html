@@ -595,7 +595,7 @@
     tbody.innerHTML = rows.map(q => {
       const j = data[q].judicial;
       const total = (j.stateWins || 0) + (j.stateLosses || 0);
-      return `<tr><td>${formatQuarterLabel(q)}</td><td>${j.casesDecided || '—'}</td><td>${j.stateWins || '—'}</td><td>${j.stateLosses || '—'}</td><td>${total ? pct(j.stateWins, total) : '—'}</td>${noteCell(j.provisions)}<td>${j.courtLevel || '—'}</td></tr>`;
+      const provText = j.provisions || '—'; const provPreview = provText.length > 120 ? provText.substring(0,120)+'…' : provText; const provEsc = provText.replace(/"/g,'&quot;'); return `<tr><td>${formatQuarterLabel(q)}</td><td>${j.casesDecided || '—'}</td><td>${j.stateWins || '—'}</td><td>${j.stateLosses || '—'}</td><td>${total ? pct(j.stateWins, total) : '—'}</td><td class="notes-cell"><span class="note-text" title="${provEsc}">${provPreview}</span></td><td>${j.courtLevel || '—'}</td></tr>`;
     }).join('');
   }
 

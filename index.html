@@ -257,7 +257,7 @@
       <div class="section-header">
         <div class="section-label">Domain II</div>
         <h2 class="section-title">Judicial Practice</h2>
-        <p class="section-desc">Tracks constitutional case activity: filings, outcomes, state win rates, time to judgment, and provisions litigated.</p>
+        <p class="section-desc">Tracks constitutional cases decided, state win rates, provisions litigated (by section), and court level distribution. Sourced from PacLII published judgments. Coverage may not reflect all constitutional proceedings.</p>
       </div>
       <div class="staff-panel" id="staff-judicial">
         <div class="staff-panel-title">Record Judicial Data</div>
@@ -265,12 +265,10 @@
         <div class="form-group" style="margin-bottom:20px; max-width:200px;"><label>Quarter</label><select id="jud-quarter"></select></div>
         <div class="form-section-label">Case Volume</div>
         <div class="form-grid">
-          <div class="form-group"><label>Constitutional Cases Filed</label><input type="number" id="j-casesFiled" min="0" placeholder="0"></div>
-          <div class="form-group"><label>Cases Decided</label><input type="number" id="j-casesDecided" min="0" placeholder="0"></div>
-          <div class="form-group"><label>Cases Pending (cumulative)</label><input type="number" id="j-casesPending" min="0" placeholder="0"></div>
+          <div class="form-group"><label>Constitutional Cases Decided</label><input type="number" id="j-casesDecided" min="0" placeholder="0"></div>
           <div class="form-group"><label>State Wins</label><input type="number" id="j-stateWins" min="0" placeholder="0"></div>
           <div class="form-group"><label>State Losses</label><input type="number" id="j-stateLosses" min="0" placeholder="0"></div>
-          <div class="form-group"><label>Avg. Days: Filing to Judgment</label><input type="number" id="j-avgDays" min="0" placeholder="0"></div>
+          <div class="form-group full"><label>Court Level Distribution</label><input type="text" id="j-courtLevel" placeholder="e.g. High Court 3, Court of Appeal 1"></div>
         </div>
         <hr class="form-divider">
         <div class="form-section-label">Qualitative Indicators</div>
@@ -289,7 +287,7 @@
       <div class="data-section">
         <div class="data-section-header"><div><div class="data-section-title">Judicial Indicators</div><div class="data-section-subtitle">Constitutional case practice record</div></div></div>
         <table>
-          <thead><tr><th>Quarter</th><th>Filed</th><th>Decided</th><th>Pending</th><th>State Wins</th><th>State Losses</th><th>Win Rate</th><th>Avg Days</th><th>Provisions</th></tr></thead>
+          <thead><tr><th>Quarter</th><th>Decided</th><th>State Wins</th><th>State Losses</th><th>Win Rate</th><th>Provisions</th><th>Court Level</th></tr></thead>
           <tbody id="judTableBody"><tr><td colspan="9" class="empty-table">No data recorded yet.</td></tr></tbody>
         </table>
       </div>
@@ -376,11 +374,10 @@
           <h3>Domain II — Judicial Practice</h3>
           <h4>What is tracked</h4>
           <ul>
-            <li><strong>Constitutional cases filed:</strong> Volume of constitutional litigation as an indicator of civic willingness to use judicial review.</li>
-            <li><strong>Cases decided vs. pending:</strong> A large backlog may indicate capacity constraints or deliberate delay.</li>
+            <li><strong>Constitutional cases decided:</strong> Published judgments where 2013 Constitution provisions were argued, sourced from PacLII. Coverage may not reflect all constitutional proceedings.</li>
             <li><strong>State win rate:</strong> A consistently high state win rate warrants further investigation.</li>
-            <li><strong>Average days from filing to judgment:</strong> Extended timelines may deprive litigants of timely relief.</li>
-            <li><strong>Provisions litigated:</strong> Reveals which parts of the constitutional architecture face operational challenge.</li>
+            <li><strong>Provisions litigated (by section):</strong> Reveals which parts of the constitutional architecture face operational challenge.</li>
+            <li><strong>Court level distribution:</strong> Whether constitutional issues are concentrated at High Court, Court of Appeal, or Supreme Court level.</li>
           </ul>
           <div class="limitations-box"><p><strong>Limitation:</strong> Published judgments do not capture unreported decisions or cases settled before judgment. This domain tracks documentary evidence of outcomes; it cannot directly establish the reasons behind those outcomes.</p></div>
         </div>
@@ -518,12 +515,10 @@
     const data = loadData();
     if (!data[q]) data[q] = {};
     data[q].judicial = {
-      casesFiled: parseInt(document.getElementById('j-casesFiled').value) || 0,
       casesDecided: parseInt(document.getElementById('j-casesDecided').value) || 0,
-      casesPending: parseInt(document.getElementById('j-casesPending').value) || 0,
       stateWins: parseInt(document.getElementById('j-stateWins').value) || 0,
       stateLosses: parseInt(document.getElementById('j-stateLosses').value) || 0,
-      avgDays: parseInt(document.getElementById('j-avgDays').value) || 0,
+      courtLevel: document.getElementById('j-courtLevel').value,
       provisions: document.getElementById('j-provisions').value,
       notableCases: document.getElementById('j-notableCases').value,
       notes: document.getElementById('j-notes').value
@@ -596,11 +591,11 @@
     const tbody = document.getElementById('judTableBody');
     const quarters = Object.keys(data).sort();
     const rows = quarters.filter(q => data[q].judicial && (filter === 'all' || q === filter));
-    if (rows.length === 0) { tbody.innerHTML = '<tr><td colspan="9" class="empty-table">No judicial data recorded yet.</td></tr>'; return; }
+    if (rows.length === 0) { tbody.innerHTML = '<tr><td colspan="7" class="empty-table">No judicial data recorded yet.</td></tr>'; return; }
     tbody.innerHTML = rows.map(q => {
       const j = data[q].judicial;
       const total = (j.stateWins || 0) + (j.stateLosses || 0);
-      return `<tr><td>${formatQuarterLabel(q)}</td><td>${j.casesFiled || '—'}</td><td>${j.casesDecided || '—'}</td><td>${j.casesPending || '—'}</td><td>${j.stateWins || '—'}</td><td>${j.stateLosses || '—'}</td><td>${total ? pct(j.stateWins, total) : '—'}</td><td>${j.avgDays ? j.avgDays + ' d' : '—'}</td>${noteCell(j.provisions)}</tr>`;
+      return `<tr><td>${formatQuarterLabel(q)}</td><td>${j.casesDecided || '—'}</td><td>${j.stateWins || '—'}</td><td>${j.stateLosses || '—'}</td><td>${total ? pct(j.stateWins, total) : '—'}</td>${noteCell(j.provisions)}<td>${j.courtLevel || '—'}</td></tr>`;
     }).join('');
   }
 
